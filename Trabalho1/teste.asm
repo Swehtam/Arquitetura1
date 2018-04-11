@@ -14,27 +14,27 @@ N2: 		addi $t0, $zero, 2
 			addi $v0, $zero, 1	# se n = 2, entao a saida eh 2
 			j end
 
-PN2:		addi $a0, $a0, -2
+PN2:		addi $a0, $a0, -2 	# diminui 2 do n e chama para o comeco da funcao
 			jal N1
 			move $t0, $v0
 			lw $a0, 0($sp)
-			sub $a0, $a0, $t0
+			sub $a0, $a0, $t0	# pega o n e diminui do resultado da chamada da funcao acima e chama novamente para o comeco da funcao
 			jal N1
 			move $s0, $v0
-			j PN1
+			j PN1				# salva o resultado em $s0 e vai para PN2
 			
 PN1:		lw $a0, 0($sp)
-			addi $a0, $a0, -1
+			addi $a0, $a0, -1	# diminui 1 do n e chama novamente para o comeco da funcao
 			jal N1
 			move $t0, $v0
 			lw $a0, 0($sp)
-			sub $a0, $a0, $t0
+			sub $a0, $a0, $t0	# pega o n e diminui do resultado da chamada da funcao acima e chama novamente para o comeco da funcao
 			jal N1
-			move $a0, $v0
+			move $a0, $v0		# pega o resultado e chama denovo para o comeco da funcao
 			jal N1
-			move $a0, $v0
+			move $a0, $v0		# mais uma vez pega o resultado e chama para o comeco funcao
 			jal N1
-			add $v0, $s0, $v0
+			add $v0, $s0, $v0	# soma com com o $s0 q estava em PN1 e retorna para a parte do codigo que tinha sido chamada
 			j end
 			
 			
